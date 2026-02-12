@@ -1,17 +1,18 @@
-/* Minimal Service Worker: cache + offline fallback */
+/* Minimal Service Worker: cache + offline fallback (GitHub Pages: /Twa/) */
 const CACHE_NAME = "twa-hello-v1";
-const OFFLINE_URL = "/offline.html";
+const BASE = "/Twa/";
+const OFFLINE_URL = BASE + "offline.html";
 
 self.addEventListener("install", (event) => {
   event.waitUntil((async () => {
     const cache = await caches.open(CACHE_NAME);
     await cache.addAll([
-      "/",
-      "/index.html",
-      "/manifest.webmanifest",
-      "/offline.html",
-      "/icons/icon-192.png",
-      "/icons/icon-512.png"
+      BASE,
+      BASE + "index.html",
+      BASE + "manifest.webmanifest",
+      BASE + "offline.html",
+      BASE + "icons/icon-192.png",
+      BASE + "icons/icon-512.png"
     ]);
     self.skipWaiting();
   })());

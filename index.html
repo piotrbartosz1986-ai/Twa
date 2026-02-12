@@ -4,9 +4,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="theme-color" content="#0b1020" />
-  <link rel="manifest" href="/manifest.webmanifest" />
-  <link rel="icon" href="/icons/icon-192.png" sizes="192x192" />
-  <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+  <link rel="manifest" href="/Twa/manifest.webmanifest" />
+  <link rel="icon" href="/Twa/icons/icon-192.png" sizes="192x192" />
+  <link rel="apple-touch-icon" href="/Twa/icons/icon-192.png" />
   <title>TWA Hello World</title>
   <style>
     :root { color-scheme: dark; }
@@ -58,7 +58,7 @@
 
     <div class="row">
       <button id="btnPing">Sprawdź Service Workera</button>
-      <a class="btn" href="/offline.html">Zobacz stronę offline</a>
+      <a class="btn" href="/Twa/offline.html">Zobacz stronę offline</a>
     </div>
 
     <p class="meta">
@@ -67,7 +67,7 @@
     </p>
 
     <p class="meta">
-      Tip: po publikacji na GitHub Pages masz HTTPS, więc PWA/TWA zadziała poprawnie.
+      Tip: GitHub Pages publikuje repo pod <code>/Twa/</code> — dlatego ścieżki są ustawione pod repo.
     </p>
   </main>
 
@@ -82,13 +82,14 @@
         return;
       }
       try {
-        const reg = await navigator.serviceWorker.register('/sw.js', { scope: '/' });
+        // Rejestracja RELATYWNA = działa w /Twa/ i lokalnie
+        const reg = await navigator.serviceWorker.register('sw.js');
         await navigator.serviceWorker.ready;
         elStatus.textContent = 'zarejestrowany ✅';
         elStatus.className = 'ok';
         return reg;
       } catch (e) {
-        elStatus.textContent = 'błąd rejestracji ❌';
+        elStatus.textContent = 'błąd rejestracji ❌ (sprawdź ścieżki / HTTPS)';
         elStatus.className = 'bad';
         console.error(e);
       }
